@@ -14,6 +14,10 @@ In order to start this assignment you need to:
 
 > Note: You will find some Bonus TODO's. These are not mandatory for completing this assignment. Feel free to flex your programming skills 💪
 
+## Development
+
+- Create a separate commit for each task listed below.
+
 ## TODO's 
 Here is a list of all the TODO's to make life a bit easier:
 
@@ -38,6 +42,3 @@ Here is a list of all the TODO's to make life a bit easier:
 You can submit your assignment by creating a merge request for your `feat/todo-assignment` branch. That's it, good luck! 🚀
 
 > The test task is developed by l.zimmerman@wearetriple.com
-
-
-
