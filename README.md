@@ -37,7 +37,7 @@ Here is a list of all the TODO's to make life a bit easier:
 ## Submitting assignment
 You can submit your assignment by creating a merge request for your `feat/todo-assignment` branch. That's it, good luck! 🚀
 
-> If any questions might arise about the assignment please contact l.zimmerman@wearetriple.com
+> The test task is developed by l.zimmerman@wearetriple.com
 
 
 
