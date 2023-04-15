@@ -34,7 +34,7 @@ body {
 }
 
 main {
-  padding: 2rem;
+  padding: 1rem;
 }
 
 small {
@@ -64,4 +64,16 @@ legend {
 
 .form-row {
   margin-bottom: 0.5em;
+}
+
+@media (min-width: 600px) {
+  main {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    padding: 0.5rem;
+  }
 }
