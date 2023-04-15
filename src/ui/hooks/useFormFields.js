@@ -8,5 +8,6 @@ export default function useFormFields(initialValues) {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  return { values, handleChange };
+  const clearFormFields = () => setValues(initialValues);
+  return { values, handleChange, clearFormFields };
 }
