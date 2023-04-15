@@ -3,7 +3,7 @@ import React from "react";
 import Address from "./ui/components/Address/Address";
 import Form from "./ui/components/Form/Form";
 import AddressBook from "./ui/components/AddressBook/AddressBook";
-
+import ErrorMessage from "./ui/components/ErrorMessage/ErrorMessage";
 import Radio from "./ui/components/Radio/Radio";
 import Section from "./ui/components/Section/Section";
 import transformAddress from "./core/models/address";
@@ -139,7 +139,7 @@ function App() {
         )}
 
         {/* TODO: Create an <ErrorMessage /> component for displaying an error message */}
-        {error && <div className="error">{error}</div>}
+        {error && <ErrorMessage error={error} />}
 
         {/* TODO: Add a button to clear all form fields. Button must look different from the default primary button, see design. */}
       </Section>
