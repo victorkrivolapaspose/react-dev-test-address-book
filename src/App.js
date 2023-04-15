@@ -10,6 +10,7 @@ import transformAddress from "./core/models/address";
 import useAddressBook from "./ui/hooks/useAddressBook";
 import useFormFields from "./ui/hooks/useFormFields";
 import Button from "./ui/components/Button/Button";
+import LoadingSpinner from "./ui/components/LoadingSpinner/LoadingSpinner";
 
 import "./App.css";
 
@@ -36,6 +37,7 @@ function App() {
    */
   const [error, setError] = React.useState(undefined);
   const [addresses, setAddresses] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
   /**
    * Redux actions
    */
@@ -50,11 +52,13 @@ function App() {
 
     const zipCode = e.target.elements.zipCode.value;
     const houseNumber = e.target.elements.houseNumber.value;
+    setIsLoading(true);
 
     const res = await fetch(
       `http://api.postcodedata.nl/v1/postcode/?postcode=${zipCode}&streetnumber=${houseNumber}&ref=domeinnaam&type=json`
     );
     const data = await res.json();
+    setIsLoading(false);
 
     if (data.status === "error") return setError(data.errormessage);
     // remove any potential previous errors if current request has no errors
@@ -64,6 +68,16 @@ function App() {
       ...data.details[0],
       houseNumber,
     });
+
+    if (
+      addresses.some(
+        (entry) =>
+          entry.postcode === transformedAddress.postcode &&
+          entry.houseNumber === transformedAddress.houseNumber
+      )
+    )
+      return setError("House already added.");
+
     setAddresses((prevAddresses) => [...prevAddresses, transformedAddress]);
 
     /** TODO: Fetch addresses based on houseNumber and zipCode
@@ -147,6 +161,7 @@ function App() {
 
         {/* TODO: Create an <ErrorMessage /> component for displaying an error message */}
         {error && <ErrorMessage error={error} />}
+        <LoadingSpinner isLoading={isLoading} />
 
         {/* TODO: Add a button to clear all form fields. Button must look different from the default primary button, see design. */}
         <Button isPrimary={false} onClick={handleClearForm}>
