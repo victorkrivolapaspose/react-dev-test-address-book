@@ -46,6 +46,24 @@ function App() {
   const handleAddressSubmit = async (e) => {
     e.preventDefault();
 
+    const zipCode = e.target.elements.zipCode.value;
+    const houseNr = e.target.elements.houseNumber.value;
+
+    const res = await fetch(
+      `http://api.postcodedata.nl/v1/postcode/?postcode=${zipCode}&streetnumber=${houseNr}&ref=domeinnaam&type=json`
+    );
+    const data = await res.json();
+
+    if (data.status === "error") return setError(data.errormessage);
+    // remove any potential previous errors if current request has no errors
+    setError(undefined);
+
+    const transformedAddress = transformAddress({
+      ...data.details[0],
+      houseNr,
+    });
+    setAddresses((prevAddresses) => [...prevAddresses, transformedAddress]);
+
     /** TODO: Fetch addresses based on houseNumber and zipCode
      * - Example URL of API: http://api.postcodedata.nl/v1/postcode/?postcode=1211EP&streetnumber=60&ref=domeinnaam.nl&type=json
      * - Handle errors if they occur
@@ -118,7 +136,7 @@ function App() {
                 key={address.id}
                 onChange={handleChange}
               >
-                <Address address={values.address} />
+                <Address address={address} />
               </Radio>
             );
           })}
