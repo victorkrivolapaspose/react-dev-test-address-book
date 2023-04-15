@@ -3,9 +3,14 @@ import cx from "classnames";
 
 import styles from "./Button.module.css";
 
-const Button = ({ children, onClick, type = "button", isPrimary = true }) => {
+const Button = ({
+  children,
+  onClick,
+  type = "button",
+  variant = "primary",
+}) => {
   let btnClassNames = `${styles.button} ${
-    isPrimary ? styles.primary : styles.secondary
+    variant === "primary" ? styles.primary : styles.secondary
   }`;
   return (
     <button
